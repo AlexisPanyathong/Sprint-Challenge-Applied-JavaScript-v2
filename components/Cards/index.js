@@ -46,12 +46,13 @@ function newCard(data) {
     
     //Set the content
     imgContainer.src = data.url;
-    headline.textContent = data.headline;
-    author.textContent = data.author;
-    by.textContent = data.by;
+    headline.textContent = `${data.headline}`;
+    author.textContent = `${data.author}`;
+    by.textContent = `${data.by}`;
 
     //Put together
     card.appendChild(headline);
+    card.appendChild(imgContainer);
     
     return card;
 }
