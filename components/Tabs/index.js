@@ -26,9 +26,6 @@ const tabs = document.querySelector('.topics');
     console.log(error);
 });
 
-// tabs.forEach(tab => {
-//     tab.classList.add('.topics-element');
-// })
 
 function newTab(data) {
     const javaScript = document.createElement('div');

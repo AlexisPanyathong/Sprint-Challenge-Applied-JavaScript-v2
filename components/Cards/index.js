@@ -22,9 +22,16 @@ console.log(cardsContainer);
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
 .then(response => {
     //handle success
-    console.log(response);
-    const card = newCard(response.data);
-    cardsContainer.appendChild(card);
+    const titles = Object.keys(response.data.articles);
+    console.log(titles);
+    titles.forEach(title => {
+        response.data.articles[title].forEach(article => {
+            const card = newCard(article);
+            cardsContainer.appendChild(card);
+        })
+    })
+
+   
 })
 .catch(error => {
     //handle error
@@ -36,6 +43,7 @@ function newCard(data) {
     const headline = document.createElement('div');
     const author = document.createElement('div');
     const imgContainer = document.createElement('div');
+    const img = document.createElement('img');
     const by = document.createElement('span');
 
     //Set the style
@@ -45,14 +53,18 @@ function newCard(data) {
     imgContainer.classList.add('img-container');
     
     //Set the content
-    imgContainer.src = data.url;
+    img.src = data.url;
     headline.textContent = `${data.headline}`;
     author.textContent = `${data.author}`;
     by.textContent = `${data.by}`;
 
     //Put together
     card.appendChild(headline);
-    card.appendChild(imgContainer);
+    card.appendChild(author);
+    author.appendChild(imgContainer);
+    imgContainer.appendChild(img);
+    author.appendChild(by);
+    
     
     return card;
 }
